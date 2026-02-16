@@ -11,10 +11,13 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     setLoading(true);
+    // Use window.location.origin to handle local and prod automatically
+    const redirectTo = `${window.location.origin}/auth/callback`
+
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${location.origin}/auth/callback`,
+        redirectTo,
       },
     });
   };
